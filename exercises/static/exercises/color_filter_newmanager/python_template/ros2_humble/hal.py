@@ -46,7 +46,7 @@ class HAL:
     def getImage(self):
         try:
             rclpy.spin_once(self.camera)
-            image = = cv2.imread("image.png", cv2.IMREAD_COLOR)
+            image = cv2.imread("image.png", cv2.IMREAD_COLOR)
             # image = self._get_test_image()
             # print(f"HAL image set, shape: {image.shape}, bytes: {image.nbytes}", flush=True)
             self.shared_image.add(image)
