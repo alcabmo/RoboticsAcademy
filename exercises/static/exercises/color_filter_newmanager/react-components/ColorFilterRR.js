@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Fragment} from "react";
 
-import "./css/FollowLineRR.css";
+import "./css/ColorFilterRR.css";
 
 const FollowLineRR = (props) => {
   return (
@@ -11,4 +11,4 @@ const FollowLineRR = (props) => {
   );
 };
 
-export default FollowLineRR;
+export default ColorFilterRR;
