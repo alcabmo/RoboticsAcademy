@@ -3,7 +3,7 @@ import {Fragment} from "react";
 
 import "./css/ColorFilterRR.css";
 
-const FollowLineRR = (props) => {
+const ColorFilterRR = (props) => {
   return (
     <Fragment>
     {props.children}
