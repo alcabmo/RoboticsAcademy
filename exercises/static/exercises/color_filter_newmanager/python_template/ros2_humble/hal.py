@@ -45,8 +45,8 @@ class HAL:
     # Get Image from ROS Driver Camera
     def getImage(self):
         try:   
-            rclpy.spin_once(self.camera)            
-            image = cv2.imread("../image.png", cv2.IMREAD_COLOR)
+            #rclpy.spin_once(self.camera)            
+            image = cv2.imread("image.png", cv2.IMREAD_COLOR)
             print(image.shape)
             image = cv2.resize(image, (640, 480))
             print(image.shape)
