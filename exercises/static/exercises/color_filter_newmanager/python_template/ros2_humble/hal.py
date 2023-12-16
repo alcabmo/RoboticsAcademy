@@ -44,9 +44,11 @@ class HAL:
 
     # Get Image from ROS Driver Camera
     def getImage(self):
-        try:
-            rclpy.spin_once(self.camera)
-            image = cv2.imread("image.png", cv2.IMREAD_COLOR)
+        try:   
+            rclpy.spin_once(self.camera)            
+            #image = cv2.imread("../image.png", cv2.IMREAD_COLOR)
+            image = cv2.imread("/home/vanejessi/jderobot/RoboticsAcademy/exercises/static/exercises/color_filter_newmanager/python_template/ros2_humble/image.png", cv2.IMREAD_COLOR)
+            image = cv2.resize(image, (640, 480))
             # image = self._get_test_image()
             # print(f"HAL image set, shape: {image.shape}, bytes: {image.nbytes}", flush=True)
             self.shared_image.add(image)
