@@ -30,7 +30,7 @@ class HAL:
     def get_image(self):
         #image = self.cam.get_frontal_image()
         image = cv2.imread('/RoboticsAcademy/exercises/static/exercises/color_filter_newmanager/python_template/ros2_humble/image.png', cv2.IMREAD_COLOR)
-        image = cv2.resize(image, (640, 480))
+        image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT))
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image_rgb
 
