@@ -42,7 +42,7 @@ function SpecificColorFilter(props) {
   );
 }
 
-SpecificRescuePeople.propTypes = {
+SpecificColorFilter.propTypes = {
   circuit: PropTypes.string,
 };
 
