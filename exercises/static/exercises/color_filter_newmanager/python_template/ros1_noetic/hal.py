@@ -1,124 +1,82 @@
-import rospy
 import numpy as np
+import rospy
 import cv2
-import threading
-import time
-from datetime import datetime
 
-from interfaces.camera import ListenerCamera
-from interfaces.motors import PublisherMotors
-from shared.image import SharedImage
-from shared.value import SharedValue
+from drone_wrapper import DroneWrapper
+
 
 # Hardware Abstraction Layer
 class HAL:
     IMG_WIDTH = 320
     IMG_HEIGHT = 240
-
+    
     def __init__(self):
-        print("HAL initializing", flush=True)
         rospy.init_node("HAL")
+    
+        self.image = None
+        self.drone = DroneWrapper(name="rqt")
 
-        # Shared memory variables
-        self.shared_image = SharedImage("halimage")
-        self.shared_v = SharedValue("velocity")
-        self.shared_w = SharedValue("angular")
-
-        # ROS Topics
-        self.camera = ListenerCamera("/F1ROS/cameraL/image_raw")
-        self.motors = PublisherMotors("/F1ROS/cmd_vel", 4, 0.3)
-
-        self.start_time = 0
-
-        # Update thread
-        self.thread = ThreadHAL(self.update_hal)
-        print("HAL initialized", flush=True)
-
-    # Function to start the update thread
-    def start_thread(self):
-        print("HAL thread starting", flush=True)
-        self.start_time = time.time()
-        self.thread.start()
-
+    # Explicit initialization functions
+    # Class method, so user can call it without instantiation
+    @classmethod
+    def initRobot(cls):
+        new_instance = cls()
+        return new_instance
+    
     # Get Image from ROS Driver Camera
-    def getImage(self):
-        try:
-            image = self.camera.getImage().data
-            # image = self._get_test_image()
-            # print(f"HAL image set, shape: {image.shape}, bytes: {image.nbytes}", flush=True)
-            self.shared_image.add(image)
-        except Exception as e:
-            print(f"Exception in hal getImage {repr(e)}")
+    def get_frontal_image(self):
+        image = self.drone.get_frontal_image()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        return image_rgb
 
-    def _get_test_image(self):
-        image = np.zeros((640, 480, 3), np.uint8)
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        bottomLeftCornerOfText = (10, 500)
-        fontScale = 0.5
-        fontColor = (255, 255, 255)
-        thickness = 1
-        lineType = 2
+    def get_ventral_image(self):
+        image = self.drone.get_ventral_image()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        return image_rgb
 
-        cv2.putText(image, f"Image generated in hal.py, running time: {time.time()-self.start_time}",
-                    bottomLeftCornerOfText,
-                    font,
-                    fontScale,
-                    fontColor,
-                    thickness,
-                    lineType)
+    def get_position(self):
+        pos = self.drone.get_position()
+        return pos
 
-        return image
+    def get_velocity(self):
+        vel = self.drone.get_velocity()
+        return vel
 
-    # Set the velocity
-    def setV(self):
-        velocity = self.shared_v.get()
-        self.motors.sendV(velocity)
+    def get_yaw_rate(self):
+        yaw_rate = self.drone.get_yaw_rate()
+        return yaw_rate
 
-    # Get the velocity
-    def getV(self):
-        velocity = self.shared_v.get()
-        return velocity
+    def get_orientation(self):
+        orientation = self.drone.get_orientation()
+        return orientation
 
-    # Get the angular velocity
-    def getW(self):
-        angular = self.shared_w.get()
-        return angular
+    def get_roll(self):
+        roll = self.drone.get_roll()
+        return roll
 
-    # Set the angular velocity
-    def setW(self):
-        angular = self.shared_w.get()
-        self.motors.sendW(angular)
+    def get_pitch(self):
+        pitch = self.drone.get_pitch()
+        return pitch
 
-    def update_hal(self):
-        self.getImage()
-        self.setV()
-        self.setW()
+    def get_yaw(self):
+        yaw = self.drone.get_yaw()
+        return yaw
 
-    # Destructor function to close all fds
-    def __del__(self):
-        self.shared_image.close()
-        self.shared_v.close()
-        self.shared_w.close()
+    def get_landed_state(self):
+        state = self.drone.get_landed_state()
+        return state
 
+    def set_cmd_pos(self, x, y, z, az):
+        self.drone.set_cmd_pos(x, y, z, az)
 
-class ThreadHAL(threading.Thread):
-    def __init__(self, update_function):
-        super(ThreadHAL, self).__init__()
-        self.time_cycle = 80
-        self.update_function = update_function
+    def set_cmd_vel(self, vx, vy, vz, az):
+        self.drone.set_cmd_vel(vx, vy, vz, az)
 
-    def run(self):
-        print("Starting HAL thread", flush=True)
-        while(True):
-            start_time = datetime.now()
+    def set_cmd_mix(self, vx, vy, z, az):
+        self.drone.set_cmd_mix(vx, vy, z, az)
 
-            # print(f"Calling update function inside hal thread")
-            self.update_function()
+    def takeoff(self, h=3):
+        self.drone.takeoff(h)
 
-            finish_time = datetime.now()
-
-            dt = finish_time - start_time
-            ms = (dt.days * 24 * 60 * 60 + dt.seconds) * 1000 + dt.microseconds / 1000.0
-
-            if(ms < self.time_cycle):
-                time.sleep((self.time_cycle - ms) / 1000.0)
+    def land(self):
+        self.drone.land()
