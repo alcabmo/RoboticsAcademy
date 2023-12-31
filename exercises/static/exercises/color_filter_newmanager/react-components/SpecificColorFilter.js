@@ -8,6 +8,13 @@ function SpecificColorFilter(props) {
   React.useEffect(() => {
     console.log("TestShowScreen subscribing to ['update'] events");
     const callback = (message) => {
+      if(message.data.update.image_camera){
+        console.log('image_camera')
+        const image = JSON.parse(message.data.update.image_camera)
+        if(image.image_left){
+          drawImageCamera(message.data.update)
+        } 
+      }   
       if(message.data.update.image){
         console.log('image')
         const image = JSON.parse(message.data.update.image)
@@ -15,7 +22,7 @@ function SpecificColorFilter(props) {
           drawImage(message.data.update)
         } 
       }
-     
+ 
     };
 
     window.RoboticsExerciseComponents.commsManager.subscribe(
@@ -37,6 +44,7 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
+      <canvas id="gui_canvas_camera"></canvas>
       <canvas id="gui_canvas"></canvas>
     </div>
   );

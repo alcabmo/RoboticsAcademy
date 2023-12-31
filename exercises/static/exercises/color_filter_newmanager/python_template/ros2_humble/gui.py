@@ -16,7 +16,7 @@ class GUI:
         t = threading.Thread(target=self.run_server)
         
         self.payload = {'image': ''}
-        self.left_payload = {'image_left': ''}
+        self.camera_payload = {'image_camera': ''}
         self.server = None
         self.client = None
         
@@ -27,9 +27,9 @@ class GUI:
         self.image_to_be_shown_updated = False
         self.image_show_lock = threading.Lock()
 
-        self.left_image_to_be_shown = None
-        self.left_image_to_be_shown_updated = False
-        self.left_image_show_lock = threading.Lock()
+        self.camera_image_to_be_shown = None
+        self.camera_image_to_be_shown_updated = False
+        self.camera_image_show_lock = threading.Lock()
         
         self.acknowledge = False
         self.acknowledge_lock = threading.Lock()
@@ -74,28 +74,28 @@ class GUI:
 
     # Function to prepare image payload
     # Encodes the image as a JSON string and sends through the WS
-    def payloadLeftImage(self):
-        self.left_image_show_lock.acquire()
-        left_image_to_be_shown_updated = self.left_image_to_be_shown_updated
-        left_image_to_be_shown = self.left_image_to_be_shown
-        self.left_image_show_lock.release()
+    def payloadCameraImage(self):
+        self.camera_image_show_lock.acquire()
+        camera_image_to_be_shown_updated = self.camera_image_to_be_shown_updated
+        camera_image_to_be_shown = self.camera_image_to_be_shown
+        self.camera_image_show_lock.release()
 
-        image = left_image_to_be_shown
-        payload = {'image_left': '', 'shape': ''}
+        image = camera_image_to_be_shown
+        payload = {'image_camera': '', 'shape': ''}
 
-        if not left_image_to_be_shown_updated:
+        if not camera_image_to_be_shown_updated:
             return payload
 
         shape = image.shape
         frame = cv2.imencode('.JPEG', image)[1]
         encoded_image = base64.b64encode(frame)
 
-        payload['image_left'] = encoded_image.decode('utf-8')
+        payload['image_camera'] = encoded_image.decode('utf-8')
         payload['shape'] = shape
 
-        self.left_image_show_lock.acquire()
-        self.left_image_to_be_shown_updated = False
-        self.left_image_show_lock.release()
+        self.camera_image_show_lock.acquire()
+        self.camera_image_to_be_shown_updated = False
+        self.camera_image_show_lock.release()
 
         return payload
 
@@ -107,11 +107,11 @@ class GUI:
         self.image_show_lock.release()
 
     # Function for student to call
-    def showLeftImage(self, image):
-        self.left_image_show_lock.acquire()
-        self.left_image_to_be_shown = image
-        self.left_image_to_be_shown_updated = True
-        self.left_image_show_lock.release()
+    def showCameraImage(self, image):
+        self.camera_image_show_lock.acquire()
+        self.camera_image_to_be_shown = image
+        self.camera_image_to_be_shown_updated = True
+        self.camera_image_show_lock.release()
 
     # Function to get the client
     # Called when a new client is received
@@ -142,10 +142,10 @@ class GUI:
         self.server.send_message(self.client, message)
 
         # Payload Left Image Message
-        left_payload = self.payloadLeftImage()
-        self.left_payload["image_left"] = json.dumps(left_payload)
+        camera_payload = self.payloadCameraImage()
+        self.camera_payload["image_camera"] = json.dumps(camera_payload)
 
-        message = "#gui" + json.dumps(self.left_payload)
+        message = "#gui" + json.dumps(self.camera_payload)
         self.server.send_message(self.client, message)
             
     # Function to read the message from websocket

@@ -33,7 +33,10 @@ class HAL:
         image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT))
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image_rgb
-
+    def get_camera_image(self):
+        #image = self.cam.get_ventral_image()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        return image_rgb
     def get_position(self):
         pos = self.drone.get_position()
         return pos
