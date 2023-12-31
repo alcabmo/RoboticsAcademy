@@ -10,6 +10,8 @@ var cameraStream = null;
 
 
 function SpecificColorFilter(props) {
+  useScript('https://webrtc.github.io/adapter/adapter-latest.js');
+  useScript('https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js');
   const [image, setImage] = React.useState(null)
   React.useEffect(() => {
       var mediaSupport = 'mediaDevices' in navigator;
@@ -76,10 +78,6 @@ function SpecificColorFilter(props) {
       <canvas id="gui_canvas_camera"></canvas>
       <canvas id="gui_canvas"></canvas>
     </div>
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js">
-    </script>
   );
 }
 
