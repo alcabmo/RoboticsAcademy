@@ -10,14 +10,12 @@ var cameraStream = null;
 
 
 function SpecificColorFilter(props) {
-  useScript('https://webrtc.github.io/adapter/adapter-latest.js');
-  useScript('https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js');
   const [image, setImage] = React.useState(null)
   React.useEffect(() => {
       var mediaSupport = 'mediaDevices' in navigator;
-
+	console.log("camera: ");
     if( mediaSupport && null == cameraStream ) {
-
+	console.log("cameraStream ");
         navigator.mediaDevices.getUserMedia({video: true})
         .then(function(mediaStream) {
 
@@ -75,7 +73,7 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
-      <canvas id="gui_canvas_camera"></canvas>
+      <video id="stream"></video>
       <canvas id="gui_canvas"></canvas>
     </div>
   );
