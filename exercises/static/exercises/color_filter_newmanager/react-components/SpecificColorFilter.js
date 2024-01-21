@@ -4,7 +4,7 @@ import { drawImage} from "./helpers/showImagesColorFilter";
 
 // The stream & capture
 var stream = document.getElementById('stream');
-
+var capture = document.getElementById('gui_canvas');
 // The video stream
 var cameraStream = null;
 
@@ -77,6 +77,19 @@ function SpecificColorFilter(props) {
       <canvas id="gui_canvas"></canvas>
     </div>
   );
+}
+
+function showImageOutput() {
+
+    if(null != cameraStream) {
+
+        var ctx = capture.getContext('2d');
+        var img = new Image();
+
+        ctx.drawImage(stream, 0, 0, capture.width, capture.height);
+
+    }
+    requestAnimationFrame(showImageOutput);
 }
 
 SpecificColorFilter.propTypes = {
