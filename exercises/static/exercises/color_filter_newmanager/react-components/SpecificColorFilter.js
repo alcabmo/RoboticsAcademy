@@ -4,7 +4,6 @@ import { drawImage} from "./helpers/showImagesColorFilter";
 
 // The stream & capture
 var stream = document.getElementById('stream');
-var capture = document.getElementById('gui_canvas');
 // The video stream
 var cameraStream = null;
 
@@ -22,6 +21,7 @@ function SpecificColorFilter(props) {
             cameraStream = mediaStream;
             stream.srcObject = mediaStream;
             stream.play();
+            	console.log("camera playyyyyyyy");
         })
         .catch(function(err) {
 
@@ -34,18 +34,16 @@ function SpecificColorFilter(props) {
 
         return;
     }
-    requestAnimationFrame(showImageOutput);
+
     console.log("TestShowScreen subscribing to ['update'] events");
     const callback = (message) => {
       if(message.data.update.image_camera){
-        console.log('image_camera')
         const image = JSON.parse(message.data.update.image_camera)
         if(image.image_left){
           drawImageCamera(message.data.update)
         } 
       }   
       if(message.data.update.image){
-        console.log('image')
         const image = JSON.parse(message.data.update.image)
         if(image.image){
           drawImage(message.data.update)
@@ -79,18 +77,6 @@ function SpecificColorFilter(props) {
   );
 }
 
-function showImageOutput() {
-
-    if(null != cameraStream) {
-
-        var ctx = capture.getContext('2d');
-        var img = new Image();
-
-        ctx.drawImage(stream, 0, 0, capture.width, capture.height);
-
-    }
-    requestAnimationFrame(showImageOutput);
-}
 
 SpecificColorFilter.propTypes = {
   circuit: PropTypes.string,
