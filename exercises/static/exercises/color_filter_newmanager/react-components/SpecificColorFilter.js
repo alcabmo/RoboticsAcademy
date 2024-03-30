@@ -70,6 +70,7 @@ function SpecificColorFilter(props) {
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
       <canvas id="gui_canvas"></canvas>
+      <canvas id="gui_canvas_camera"></canvas>
     </div>
   );
 }
