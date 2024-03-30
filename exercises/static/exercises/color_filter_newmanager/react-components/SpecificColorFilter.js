@@ -22,7 +22,7 @@ function SpecificColorFilter(props) {
  
     };
 
-   return () => {
+/*   return () => {
 	   // Start Streaming
 
 	    var mediaSupport = 'mediaDevices' in navigator;
@@ -48,7 +48,7 @@ function SpecificColorFilter(props) {
 		return;
 	    }
 
-    };
+    };*/
    
     window.RoboticsExerciseComponents.commsManager.subscribe(
       [window.RoboticsExerciseComponents.commsManager.events.UPDATE],
@@ -69,8 +69,8 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
+      <canvas id="stream"></canvas>
       <canvas id="gui_canvas"></canvas>
-      <canvas id="gui_canvas_camera"></canvas>
     </div>
   );
 }
