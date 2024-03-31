@@ -1,9 +1,9 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { drawImage} from "./helpers/showImagesColorFilter";
+import {drawImage, startStreaming} from "./helpers/showImagesColorFilter";
 
 // The stream & capture
-var stream = document.getElementById('stream');
+//var stream = document.getElementById('stream');
 
 
 function SpecificColorFilter(props) {
@@ -22,33 +22,11 @@ function SpecificColorFilter(props) {
  
     };
 
-   /*return () => {
-	   // Start Streaming
+   return () => {
+        // Start Streaming
+	startStreaming()
 
-	    var mediaSupport = 'mediaDevices' in navigator;
-
-	    if( mediaSupport && null == cameraStream ) {
-
-		navigator.mediaDevices.getUserMedia({video: true})
-		.then(function(mediaStream) {
-
-		    cameraStream = mediaStream;
-		    stream.srcObject = mediaStream;
-		    stream.play();
-		})
-		.catch(function(err) {
-
-		    console.log("Unable to access camera: " + err);
-		});
-	    }
-	    else {
-
-		alert('Your browser does not support media devices.');
-
-		return;
-	    }
-
-    };*/
+    };
    
     window.RoboticsExerciseComponents.commsManager.subscribe(
       [window.RoboticsExerciseComponents.commsManager.events.UPDATE],
@@ -69,8 +47,8 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
-      <canvas id="gui_canvas"></canvas>
       <canvas id="stream"></canvas>
+      <canvas id="gui_canvas"></canvas>
     </div>
   );
 }

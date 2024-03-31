@@ -5,6 +5,10 @@ function decode_utf8(s){
 
 let image = new Image();
 let image_camera = new Image();
+// The stream & capture
+var stream = document.getElementById('stream');
+// The video stream
+var cameraStream = null;
 
 export function drawImage (data){
     var canvas = document.getElementById("gui_canvas"),
@@ -58,4 +62,32 @@ export function drawImageCamera (data){
         canvas_camera.width = shape[1];
         canvas_camera.height = shape[0];
     }   
+}
+
+// Start Streaming
+export function startStreaming() {
+
+    var mediaSupport = 'mediaDevices' in navigator;
+
+    if( mediaSupport && null == cameraStream ) {
+
+        navigator.mediaDevices.getUserMedia({video: true})
+        .then(function(mediaStream) {
+
+            cameraStream = mediaStream;
+            stream.srcObject = mediaStream;
+            stream.play();
+        })
+        .catch(function(err) {
+
+            console.log("Unable to access camera: " + err);
+        });
+    }
+    else {
+
+        alert('Your browser does not support media devices.');
+
+        return;
+    }
+    //requestAnimationFrame(showImageOutput);
 }
