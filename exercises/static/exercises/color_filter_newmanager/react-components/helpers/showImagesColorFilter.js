@@ -67,6 +67,7 @@ export function drawImageCamera (data){
 // Start Streaming
 export function startStreaming() {
 
+console.log("startStreaming");
     var mediaSupport = 'mediaDevices' in navigator;
 
     if( mediaSupport && null == cameraStream ) {
@@ -77,6 +78,7 @@ export function startStreaming() {
             cameraStream = mediaStream;
             stream.srcObject = mediaStream;
             stream.play();
+            console.log("stream play");
         })
         .catch(function(err) {
 
