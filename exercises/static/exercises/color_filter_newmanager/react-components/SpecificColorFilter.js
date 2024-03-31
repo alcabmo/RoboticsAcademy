@@ -10,6 +10,8 @@ function SpecificColorFilter(props) {
   const [image, setImage] = React.useState(null)
   React.useEffect(() => {
     console.log("TestShowScreen subscribing to ['update'] events");
+    // Start Streaming
+    startStreaming()
     const callback = (message) => { 
       if(message.data.update.image)
       {
@@ -22,11 +24,11 @@ function SpecificColorFilter(props) {
  
     };
 
-   return () => {
-        // Start Streaming
-	startStreaming()
-
-    };
+   /*return () => {
+        
+   // Start Streaming
+    startStreaming()
+    };*/
    
     window.RoboticsExerciseComponents.commsManager.subscribe(
       [window.RoboticsExerciseComponents.commsManager.events.UPDATE],
