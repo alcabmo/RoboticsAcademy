@@ -9,7 +9,7 @@ let image_camera = new Image();
 var stream = document.getElementById('stream');
 // The video stream
 var cameraStream = null;
-
+var prueba = 0;
 export function drawImage (data){
     var canvas = document.getElementById("gui_canvas"),
     context = canvas.getContext('2d')
@@ -66,19 +66,21 @@ export function drawImageCamera (data){
 
 // Start Streaming
 export function startStreaming() {
-
+if (prueba == 0)
+{
 console.log("startStreaming");
     var mediaSupport = 'mediaDevices' in navigator;
 
     if( mediaSupport && null == cameraStream ) {
 
-        window.navigator.mediaDevices.getUserMedia({video: true})
+        navigator.mediaDevices.getUserMedia({video: true})
         .then(function(mediaStream) {
 
             cameraStream = mediaStream;
             stream.srcObject = mediaStream;
             stream.play();
             console.log("stream play");
+            prueba = 1;
         })
         .catch(function(err) {
 
@@ -93,4 +95,5 @@ console.log("startStreaming");
         return;
     }
     //requestAnimationFrame(showImageOutput);
+ }
 }

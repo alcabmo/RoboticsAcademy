@@ -50,7 +50,6 @@ function SpecificColorFilter(props) {
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
     <video id='stream' width="600" height="300" autoplay playsinline></video> 
-    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
       <canvas id="gui_canvas"></canvas>
     </div>
   );
@@ -60,5 +59,11 @@ function SpecificColorFilter(props) {
 SpecificColorFilter.propTypes = {
   circuit: PropTypes.string,
 };
+
+setTimeout(function(){
+    console.log("START LAUNCHER");
+    startStreaming();
+    //declare_webrtcframe();
+}, 10000);
 
 export default SpecificColorFilter
