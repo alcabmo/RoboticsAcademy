@@ -17,7 +17,7 @@ function Camera() {
 
   return (
     <div style={{display: "flex", width: "100%", height: "100%"}}>
-      <video ref={videoRef} width="720" height="540" autoPlay></video>
+      <video ref={videoRef} autoPlay></video>
     </div>
   );
 }
