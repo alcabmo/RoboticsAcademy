@@ -72,7 +72,7 @@ console.log("startStreaming");
 
     if( mediaSupport && null == cameraStream ) {
 
-        navigator.mediaDevices.getUserMedia({video: true})
+        window.navigator.mediaDevices.getUserMedia({video: true})
         .then(function(mediaStream) {
 
             cameraStream = mediaStream;
