@@ -11,7 +11,7 @@ function SpecificColorFilter(props) {
   React.useEffect(() => {
     console.log("TestShowScreen subscribing to ['update'] events");
     // Start Streaming
-    startStreaming()
+    //startStreaming()
     const callback = (message) => { 
       if(message.data.update.image)
       {
@@ -64,6 +64,6 @@ setTimeout(function(){
     console.log("START LAUNCHER");
     startStreaming();
     //declare_webrtcframe();
-}, 10000);
+}, 5000);
 
 export default SpecificColorFilter
