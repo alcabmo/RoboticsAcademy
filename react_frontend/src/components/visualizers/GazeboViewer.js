@@ -45,7 +45,7 @@ function GazeboViewer(props) {
               height: "100%",
             }}
             src={
-              "http://127.0.0.1:6080/vnc.html?resize=remote&autoconnect=true"
+              "https://127.0.0.1:6080/vnc.html?resize=remote&autoconnect=true"
             }
           />
         </Box>
