@@ -66,7 +66,7 @@ export function drawImageCamera (data){
 }
 
 // Start Streaming
-export function startStreaming() {
+/*export function startStreaming() {
 
 console.log("startStreaming");
     var mediaSupport = 'mediaDevices' in navigator;
@@ -96,7 +96,7 @@ console.log("startStreaming");
     }
     //requestAnimationFrame(showImageOutput);
 
-}
+}*/
 
 /*function stopStreaming() {
 
