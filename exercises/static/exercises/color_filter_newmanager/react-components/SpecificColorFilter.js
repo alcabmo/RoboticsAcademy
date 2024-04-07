@@ -50,6 +50,7 @@ function SpecificColorFilter(props) {
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
     <video id='stream' width="600" height="300" autoplay playsinline></video> 
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
       <canvas id="gui_canvas"></canvas>
     </div>
   );
