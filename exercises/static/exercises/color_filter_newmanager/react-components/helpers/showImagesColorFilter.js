@@ -83,6 +83,7 @@ console.log("startStreaming");
         .catch(function(err) {
 
             console.log("Unable to access camera: " + err);
+            console.log("Unable to access camera: " + err.name + ":" + err.message);
         });
     }
     else {
