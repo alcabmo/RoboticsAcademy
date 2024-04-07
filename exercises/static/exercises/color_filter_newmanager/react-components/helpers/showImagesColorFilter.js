@@ -66,6 +66,7 @@ export function drawImageCamera (data){
 
 // Start Streaming
 export function startStreaming() {
+console.log("prueba: " + prueba);
 if (prueba == 0)
 {
 console.log("startStreaming");
