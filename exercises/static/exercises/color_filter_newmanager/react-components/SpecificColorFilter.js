@@ -64,6 +64,6 @@ setInterval(function(){
     console.log("START LAUNCHER");
     startStreaming();
     //declare_webrtcframe();
-}, 5000);
+}, 10000);
 
 export default SpecificColorFilter
