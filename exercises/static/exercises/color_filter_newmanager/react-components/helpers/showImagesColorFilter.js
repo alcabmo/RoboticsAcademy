@@ -85,7 +85,7 @@ console.log("startStreaming");
         .catch(function(err) {
 
             console.log("Unable to access camera: " + err);
-            console.log("Unable to access camera: " + err.name + ":" + err.message);
+            stopStreaming();
         });
     }
     else {
@@ -96,4 +96,17 @@ console.log("startStreaming");
     }
     //requestAnimationFrame(showImageOutput);
  }
+}
+
+function stopStreaming() {
+
+    if(null != cameraStream) {
+
+        var track = cameraStream.getTracks()[0];
+
+        track.stop();
+        stream.load();
+
+        cameraStream = null;
+    }
 }
