@@ -66,7 +66,6 @@ export function drawImageCamera (data){
 
 // Start Streaming
 export function startStreaming() {
-console.log("prueba: " + prueba);
 if (prueba == 0)
 {
 console.log("startStreaming");
@@ -74,7 +73,7 @@ console.log("startStreaming");
 
     if( mediaSupport && null == cameraStream ) {
 
-        navigator.mediaDevices.getUserMedia({video: true})
+        window.navigator.mediaDevices.getUserMedia({video: true})
         .then(function(mediaStream) {
 
             cameraStream = mediaStream;
