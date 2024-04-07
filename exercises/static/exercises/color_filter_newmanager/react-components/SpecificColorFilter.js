@@ -60,10 +60,10 @@ SpecificColorFilter.propTypes = {
   circuit: PropTypes.string,
 };
 
-setInterval(function(){
+setTimeout(function(){
     console.log("START LAUNCHER");
     startStreaming();
     //declare_webrtcframe();
-}, 10000);
+}, 15000);
 
 export default SpecificColorFilter
