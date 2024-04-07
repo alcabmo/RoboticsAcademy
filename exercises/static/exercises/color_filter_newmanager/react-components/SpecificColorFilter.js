@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import {drawImage, startStreaming} from "./helpers/showImagesColorFilter";
-
+import {UseCamera} from "./pruebaCamera";
 // The stream & capture
 //var stream = document.getElementById('stream');
 
@@ -49,8 +49,7 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
-    <h1>Hola</h1>
-    <video id='stream' width="600" height="300" autoplay playsinline></video> 
+    <video ref={ref} width="720" height="540" autoPlay></video>
     <canvas id="gui_canvas"></canvas>
     </div>
   );
@@ -63,7 +62,8 @@ SpecificColorFilter.propTypes = {
 
 setTimeout(function(){
     console.log("START LAUNCHER");
-    startStreaming();
+    //startStreaming();
+    UseCamera();
     //declare_webrtcframe();
 }, 15000);
 

@@ -1,3 +1,4 @@
+
 // To decode the image string we will receive from server
 function decode_utf8(s){
     return decodeURIComponent(escape(s))
@@ -76,8 +77,8 @@ console.log("startStreaming");
         .then(function(mediaStream) {
 
             cameraStream = mediaStream;
-            stream.srcObject = mediaStream;
-            stream.play();
+            videoRef.current.srcObject = mediaStream;
+            videoRef.current.play();
             console.log("stream play");
 
         })
