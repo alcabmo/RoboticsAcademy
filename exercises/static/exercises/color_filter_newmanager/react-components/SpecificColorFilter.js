@@ -49,10 +49,7 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
-      <video id='stream'
-		width="600"
-			height="300"
-			autoplay playsinline> 
+    <video id='stream' width="600" height="300" autoplay playsinline></video> 
       <canvas id="gui_canvas"></canvas>
     </div>
   );
