@@ -49,7 +49,7 @@ function SpecificColorFilter(props) {
   return (
     <div style={{display: "flex",   width: "100%",
     height: "100%"}}>
-    <video ref={ref} width="720" height="540" autoPlay></video>
+    <video ref={props.videoRef} width="720" height="540" autoPlay></video>
     <canvas id="gui_canvas"></canvas>
     </div>
   );

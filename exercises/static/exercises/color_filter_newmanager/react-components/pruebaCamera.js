@@ -16,7 +16,7 @@ const UseCamera = () => {
         }
     }, []);
 
-    return <VideoComponent ref={videoRef} />;
+    return <SpecificColorFilter ref={videoRef} />;
 };
 
 export default UseCamera;
