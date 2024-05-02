@@ -11,16 +11,15 @@ function SpecificColorFilter(props) {
     console.log("TestShowScreen subscribing to ['update'] events");
     // Start Streaming
     //startStreaming()
-    const callback = (message) => { 
-      if(message.data.update.image)
-      {
-        const image = JSON.parse(message.data.update.image)
-        if(image.image)
-        {
-          drawImage(message.data.update)
-        } 
+    const callback = (message) => {
+      console.log(message);
+
+      if (message.data.update.image) {
+        drawImage(message.data.update);
       }
- 
+
+      // Send the ACK of the msg
+      window.RoboticsExerciseComponents.commsManager.send("gui", "ack");
     };
 
    /*return () => {
