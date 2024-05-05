@@ -105,6 +105,6 @@ start_console()
 
 # Expose the user functions
 def showImage(image):
-    gui.settImage(image)
+    gui.setImage(image)
 
 
