@@ -17,7 +17,7 @@ IMG_HEIGHT = 240
 
 
 # Get Image from ROS Driver Camera
-def get_image(self):
+def get_image():
     #image = self.cam.get_frontal_image()
     image = cv2.imread('/RoboticsAcademy/exercises/static/exercises/color_filter_newmanager/python_template/ros2_humble/image.png', cv2.IMREAD_COLOR)
     image = cv2.resize(image, (320, 240))
