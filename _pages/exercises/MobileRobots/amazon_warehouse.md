@@ -47,6 +47,12 @@ example:
     alt: "Example"
     title: "Example"
 
+original_axis:
+  - url: /assets/images/exercises/amazon_warehouse/original_axis.png
+    alt: "Warehouse 1"
+    image_path: /assets/images/exercises/amazon_warehouse/original_axis.png
+    title: "Warehouse 1"
+
 youtubeId: EVt9vYqEoDg
 ---
 
@@ -81,9 +87,9 @@ There are two warehouses to choose from:
 {% include gallery id="warehouse1" caption="Warehouse 1" %}
 
 
-#### Warehouse 2: 
+#### Warehouse 2:
 * The warehouse size is 34 meters long and 22 meters wide.
-* The shelves coordinates from 1 to 9 are: (-8.5, -6.0), (-1.5, -6.0), (5.5, -6.0), (-8.5, 4.0), (-1.5, 4.0), (5.5, 4.0), (-1.0, -15.5), (-2, 11.5), (1.0, -15.0). 
+* The shelves coordinates from 1 to 9 are: (-8.5, -6.0), (-1.5, -6.0), (5.5, -6.0), (-8.5, 4.0), (-1.5, 4.0), (5.5, 4.0), (-1.0, -15.5), (-2, 11.5), (1.0, -15.0).
   * The separation distance between two neighboring shelves is 2 m on the x axis and 1.5 m on the y axis.
 * You can get the warehouse's map from there: /RoboticsAcademy/exercises/static/exercises/amazon_warehouse_newmanager/resources/images/map_2.png
 
@@ -194,14 +200,14 @@ def plot_path(solution_path, dimensions):
   x, y = path.T
   ax = plt.gca()
   ax.plot(x, y, 'r--')
-  ax.plot(x, y, 'go') 
+  ax.plot(x, y, 'go')
   ax.axis(xmin=dimensions[0], xmax=dimensions[2], ymin=dimensions[1], ymax=dimensions[3])
   ax.add_patch(plt.Circle((obstacle[0], obstacle[1]), radius=obstacle[2]))
 
   plt.show()
 
 if __name__ == "__main__":
-  dimensions = [0, 0, 10, 10] 
+  dimensions = [0, 0, 10, 10]
   obstacle = [5.5, 5.5, 1]   # [x, y, radius]
   plan()
 ```
@@ -303,6 +309,24 @@ The library offers the possibility to set an optimization objective, which could
 
 ### Important points to remember
 * Convert the coordinates from meter to pixel before representing with *GUI.showPath(array)*.
+* The HAL.getPose3d() functions returns an x,y based in this axis refrence, with (0,0) next to the robot spawn in Warehouse 1:
+
+{% include gallery id="original_axis" caption="HAL.getPose3d()" %}
+
+
+## Videos
+
+### Demonstrative video of completed solution
+
+{% include youtubePlayer.html id=page.youtubeId %}
+
+- Contributors: [Lucía Lishan Chen Huang](https://github.com/lu164), [Blanca Soria Rubio](https://github.com/Blancasr), [Jose María Cañas](https://github.com/jmplaza)
+- Maintained by [Lucía Lishan Chen Huang](https://github.com/lu164).
+
+## References
+
+1. [https://ompl.kavrakilab.org/](https://ompl.kavrakilab.org/)
+2. [https://ompl.kavrakilab.org/OMPL_Primer.pdf](https://ompl.kavrakilab.org/OMPL_Primer.pdf)
 
 
 ## Videos
